@@ -1,0 +1,10 @@
+body {
+  font-family: "Josefin Sans", sans-serif;
+  background: linear-gradient(150.03deg, #ffffff 0%, #fff4f4 84.51%);
+}
+
+.layout {
+  padding: 0 32px;
+  @include breakpoint(desktop) {
+  }
+}
