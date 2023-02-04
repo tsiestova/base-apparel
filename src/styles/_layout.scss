@@ -6,14 +6,26 @@ body {
   background: linear-gradient(150.03deg, #ffffff 0%, #fff4f4 84.51%);
   min-height: 100%;
   padding-bottom: 92px;
+
+  &:after {
+    @include breakpoint(desktop) {
+      content: "";
+      background: url("./assets/bg-pattern-desktop.svg") no-repeat top left;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      margin: auto;
+      right: 0;
+    }
+  }
 }
 
 .layout {
   padding: 0 32px;
 
   @include breakpoint(desktop) {
-    //padding: 0 50px 0 50px;
-    //max-width: 600px;
-    //margin: auto;
+    position: relative;
+    z-index: 1;
   }
 }

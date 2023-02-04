@@ -66,6 +66,7 @@
       margin: 0;
       background-size: contain;
       left: auto;
+      z-index: 1;
     }
   }
 }
@@ -85,6 +86,7 @@
     @include breakpoint(desktop) {
       max-width: 538px;
       padding: 0 20px;
+      text-align: left;
     }
   }
 }
@@ -156,15 +158,39 @@
 }
 
 .form {
-  span {
+  .form-massage {
     font-weight: 400;
     font-size: 13px;
-    line-height: 13px;
+    line-height: 28px;
     color: var(--color5);
+    text-align: left;
+    padding-left: 30px;
+    display: none;
+  }
+
+  &.error {
+    .form-massage {
+      display: block;
+    }
+
+    .form-wrap {
+      position: relative;
+
+      &:after {
+        content: "";
+        background-image: url("./assets/icon-error.svg");
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 0;
+        right: 116px;
+        bottom: 0;
+        margin: auto;
+      }
+    }
   }
 }
 .form-wrap {
-  opacity: 0.5;
   border: 1px solid var(--color3);
   height: 100%;
   border-radius: 28px;
@@ -175,10 +201,11 @@
   padding-left: 23px;
   max-width: 446px;
   margin: auto;
+  position: relative;
 
   @include breakpoint(desktop) {
     padding-left: 31px;
-    margin: 0;
+    margin: 0 0 8px;
   }
 }
 

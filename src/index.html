@@ -40,16 +40,18 @@
               store. Add your email below to stay up-to-date with announcements
               and our launch deals.
             </div>
-            <form action="#" class="form">
+            <form action="#" class="form" id="form" novalidate>
               <div class="form-wrap">
                 <input
                   class="email-input"
                   type="email"
+                  name="user-email"
                   placeholder="Email Address"
+                  id="user-input"
                 />
                 <button type="submit" class="btn-submit"></button>
               </div>
-              <!--            <span>Please provide a valid email</span>-->
+              <span class="form-massage">Please provide a valid email</span>
             </form>
           </div>
         </div>
