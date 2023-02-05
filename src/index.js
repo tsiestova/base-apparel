@@ -10,7 +10,7 @@ class App {
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
     this.userInput.addEventListener("blur", (e) => this.handleBlur(e));
     this.userInput.addEventListener("focus", (e) => this.handleFocus(e));
-    this.userInput.addEventListener("keydown", (e) => this.handleKeypress(e));
+    this.userInput.addEventListener("input", (e) => this.handleInput(e));
   }
 
   isEmailValid(value) {
@@ -30,12 +30,8 @@ class App {
     this.errorAtrVisible(false);
   }
 
-  handleKeypress(e) {
-    const inputValue = e.target.value;
-
-    e.key === "Enter" && !this.isEmailValid(inputValue)
-      ? this.errorAtrVisible(true)
-      : this.errorAtrVisible(false);
+  handleInput() {
+    this.errorAtrVisible(false);
   }
 
   handleSubmit(e) {
@@ -45,8 +41,11 @@ class App {
     const inputValue = form["user-email"].value;
 
     if (!this.isEmailValid(inputValue)) {
+      this.errorAtrVisible(true);
       return;
     }
+
+    this.errorAtrVisible(false);
 
     fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",
@@ -58,7 +57,6 @@ class App {
       }),
     })
       .then((data) => {
-        console.log(data);
         this.form.reset();
       })
       .catch((e) => console.log(e));
