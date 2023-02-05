@@ -10,13 +10,14 @@ body {
   &:after {
     @include breakpoint(desktop) {
       content: "";
-      background: url("./assets/bg-pattern-desktop.svg") no-repeat top left;
+      background: url("./assets/bg-pattern-desktop.svg") no-repeat bottom left;
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
       margin: auto;
       right: 0;
+      background-size: 60%;
     }
   }
 }

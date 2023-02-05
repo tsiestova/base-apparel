@@ -8,11 +8,9 @@ class App {
 
   addEventListeners() {
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
-    this.userInput.addEventListener("blur", (e) => this.handleInputChange(e));
-    this.userInput.addEventListener("focus", (e) => this.handleInputChange(e));
-    this.userInput.addEventListener("keypress", (e) =>
-      this.handleInputChange(e)
-    );
+    this.userInput.addEventListener("blur", (e) => this.handleBlur(e));
+    this.userInput.addEventListener("focus", (e) => this.handleFocus(e));
+    this.userInput.addEventListener("keydown", (e) => this.handleKeypress(e));
   }
 
   isEmailValid(value) {
@@ -21,24 +19,23 @@ class App {
     return value.length && value.match(pattern);
   }
 
-  handleInputChange(e) {
+  handleBlur(e) {
+    const inputValue = e.target.value;
+    if (inputValue.length) {
+      this.errorAtrVisible(true);
+    }
+  }
+
+  handleFocus() {
+    this.errorAtrVisible(false);
+  }
+
+  handleKeypress(e) {
     const inputValue = e.target.value;
 
-    if (!this.isEmailValid(inputValue)) {
-      if (e.type === "blur" && inputValue.length) {
-        this.errorAtrVisible(true);
-      }
-      if (e.type === "focus") {
-        this.errorAtrVisible(false);
-      }
-      if (e.type === "keypress" && e.key === "Enter") {
-        this.errorAtrVisible(true);
-      }
-
-      if (e.type === "keypress" && e.key !== "Enter") {
-        this.errorAtrVisible(false);
-      }
-    }
+    e.key === "Enter" && !this.isEmailValid(inputValue)
+      ? this.errorAtrVisible(true)
+      : this.errorAtrVisible(false);
   }
 
   handleSubmit(e) {
@@ -50,6 +47,21 @@ class App {
     if (!this.isEmailValid(inputValue)) {
       return;
     }
+
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "applicaton/json",
+      },
+      body: JSON.stringify({
+        email: inputValue,
+      }),
+    })
+      .then((data) => {
+        console.log(data);
+        this.form.reset();
+      })
+      .catch((e) => console.log(e));
   }
 
   errorAtrVisible(value) {

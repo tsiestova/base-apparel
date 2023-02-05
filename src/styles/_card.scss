@@ -59,12 +59,12 @@
     background-size: cover;
 
     @include breakpoint(desktop) {
-      background: url("./assets/hero-desktop.jpg") no-repeat center right;
+      background: url("./assets/hero-desktop.jpg") no-repeat center left;
       height: 100%;
       width: 43%;
       top: 0;
       margin: 0;
-      background-size: contain;
+      background-size: cover;
       left: auto;
       z-index: 1;
     }
