@@ -8,7 +8,6 @@ class App {
 
   addEventListeners() {
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
-    this.userInput.addEventListener("blur", (e) => this.handleBlur(e));
     this.userInput.addEventListener("focus", (e) => this.handleFocus(e));
     this.userInput.addEventListener("input", (e) => this.handleInput(e));
   }
@@ -17,13 +16,6 @@ class App {
     const pattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
     return value.length && value.match(pattern);
-  }
-
-  handleBlur(e) {
-    const inputValue = e.target.value;
-    if (inputValue.length) {
-      this.errorAtrVisible(true);
-    }
   }
 
   handleFocus() {
@@ -44,8 +36,6 @@ class App {
       this.errorAtrVisible(true);
       return;
     }
-
-    this.errorAtrVisible(false);
 
     fetch("https://jsonplaceholder.typicode.com/posts", {
       method: "POST",

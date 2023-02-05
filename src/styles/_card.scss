@@ -301,4 +301,10 @@
     right: 0;
     position: absolute;
   }
+
+  &:hover {
+    @include breakpoint(desktop) {
+      cursor: pointer;
+    }
+  }
 }
