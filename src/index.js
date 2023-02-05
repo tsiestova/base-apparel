@@ -10,12 +10,22 @@ class App {
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
     this.userInput.addEventListener("focus", (e) => this.handleFocus(e));
     this.userInput.addEventListener("input", (e) => this.handleInput(e));
+    this.userInput.addEventListener("blur", (e) => this.handleBlur(e));
   }
 
   isEmailValid(value) {
     const pattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
 
     return value.length && value.match(pattern);
+  }
+
+  handleBlur(e) {
+    console.log("blur");
+    const inputValue = e.target.value;
+
+    if (!this.isEmailValid(inputValue)) {
+      this.errorAtrVisible(true);
+    }
   }
 
   handleFocus() {
